@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+      create a use A construct without param
+    -->
+    <bean id="a" class="com.dl.doit.reflect.iocdi.A"/>
+
+    <!--
+       create b use A static factory method
+    -->
+    <bean id="b" class="com.dl.doit.reflect.iocdi.A" factory-method="createBObj"/>
+
+    <!--
+        create c use A instance factory method
+    -->
+    <bean id="c" factory-bean="a" factory-method="createCObj"/>
+
+    <!--
+        DI create e use E construct with param
+    -->
+    <bean id="d" class="com.dl.doit.reflect.iocdi.D">
+        <constructor-arg ref="a"/>
+        <constructor-arg ref="b"/>
+    </bean>
+
+    <!--
+        DI use setter
+    -->
+    <bean id="e" class="com.dl.doit.reflect.iocdi.E">
+        <property name="a" ref="a"/>
+        <property name="b" ref="b"/>
+    </bean>
+</beans>
